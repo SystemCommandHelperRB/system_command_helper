@@ -5,7 +5,15 @@ describe SystemCommandHelper do
     expect(SystemCommandHelper::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'settings' do
+    class A
+      include SystemCommandHelper
+    end
+
+    a = A.new
+    a.no_exec = true
+    expect(a.no_exec).to eq(true)
+    a.quiet = true
+    expect(a.quiet).to eq(true)
   end
 end
