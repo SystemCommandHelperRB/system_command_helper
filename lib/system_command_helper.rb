@@ -9,7 +9,7 @@ module SystemCommandHelper
     end
     unless @no_exec
       result = system cmd
-      if result != 0 && @on_error
+      if !result && @on_error
         @on_error.call(cmd, result)
       end
       result
