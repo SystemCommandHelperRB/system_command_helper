@@ -9,8 +9,8 @@ module SystemCommandHelper
     end
     unless @no_exec
       result = system cmd
-      if result != 0 && respond_to?(:sys_error, true)
-        sys_error(cmd)
+      if result != 0 && @on_error
+        @on_error.call(cmd)
       end
       result
     end
@@ -23,5 +23,9 @@ module SystemCommandHelper
     unless @no_exec
       `#{cmd}`
     end
+  end
+
+  def on_error(&block)
+    @on_error = block
   end
 end
