@@ -8,7 +8,11 @@ module SystemCommandHelper
       puts "\e[35m#{Dir.pwd}$\e[0m #{cmd}"
     end
     unless @no_exec
-      system cmd
+      result = system cmd
+      if result != 0 && respond_to?(:sys_error, true)
+        sys_error(cmd)
+      end
+      result
     end
   end
 
